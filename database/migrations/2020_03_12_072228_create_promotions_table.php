@@ -15,6 +15,12 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('discount');
+            $table->string('description');
+            $table->string('link');
+            $table->string('image_path');
+            $table->date('validate_start_date');
+            $table->date('validate_end_date');
             $table->unsignedBigInteger('code_id')->index();
             $table->timestamps();
         });
