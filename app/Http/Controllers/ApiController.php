@@ -11,7 +11,7 @@ class ApiController extends Controller
         try {
             $code = Code::where('name', $codeParam)->first();
             if ($code != null){
-                $validPromotions = Promotion::where("codes_id", $code->id )->get();
+                $validPromotions = Promotion::where("code_id", $code->id )->get();
                 if (count($validPromotions) !== 0){
                     return $validPromotions;
                 }else{
