@@ -13,7 +13,7 @@ class ApiController extends Controller
             if ($code != null){
                 $validPromotions = Promotion::where("code_id", $code->id )->get();
                 if (count($validPromotions) !== 0){
-                    return $validPromotions;
+                    return response()->json($validPromotions);
                 }else{
                     return response()->json([
                         'error' => 'Aucune promotion pour ce code',
@@ -26,7 +26,7 @@ class ApiController extends Controller
             }
         }catch (\Exception $e){
             $message = null;
-            return $e;
+            return response()->json($e);
         }
     }
 }
