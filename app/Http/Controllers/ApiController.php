@@ -15,14 +15,14 @@ class ApiController extends Controller
                 if (count($validPromotions) !== 0){
                     return response()->json($validPromotions);
                 }else{
-                    return response()->json([
+                    return response()->json(array([
                         'error' => 'Aucune promotion pour ce code',
-                    ]);
+                    ]));
                 }
             }else{
-                return response()->json([
+                return response()->json(array([
                     'error' => 'Code promo non connu',
-                ]);
+                ]));
             }
         }catch (\Exception $e){
             $message = null;
