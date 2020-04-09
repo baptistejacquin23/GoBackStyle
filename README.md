@@ -1,3 +1,37 @@
+## Instruction of set up
+
+- Cloner le projet
+
+- Faire "composer install"
+
+- Faire "npm install"
+ 
+- Faire "php artisan key:generate"
+
+- Créer une base de donnée sans tables
+
+- Copier le .env.exemple en .env
+
+- Modifier dans le fichier .env avec les infos de la BDD
+````
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=port
+DB_DATABASE=name
+DB_USERNAME=user
+DB_PASSWORD=password
+````
+- Faire "php artisan migrate"
+
+- Pour finir faire "php artisan serve"
+
+
+
+ 
+
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
