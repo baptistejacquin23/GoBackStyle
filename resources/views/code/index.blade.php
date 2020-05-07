@@ -2,26 +2,26 @@
 
 @section('content')
     <div class="container">
-        <h1>Liste des Codes</h1>
+        <h1>Code list</h1>
         <br>
-        <a href="{{route("create_code")}}" class="btn btn-success"> Créer un code</a><br><br>
+        <a href="{{route("create_code")}}" class="btn btn-success"> Create code</a><br><br>
 
         <table id="myTable" class="table text-center">
             <thead class="table-dark">
             <td> Nom</td>
-            <td class="not-searchable"> Modifier</td>
-            <td class="not-searchable"> Supprimer</td>
+            <td class="not-searchable"> Edit</td>
+            <td class="not-searchable"> Delete</td>
 
             </thead>
             <tbody>
             @foreach( $listCode as $code)
                 <tr>
                     <td>{{$code->name}}</td>
-                    <td><a href="{{route('edit_code',  [$code->id])}}" class="btn btn-warning">Modifier</a></td>
+                    <td><a href="{{route('edit_code',  [$code->id])}}" class="btn btn-warning">Edit</a></td>
                     <td><!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                 data-target="#exampleModal{{$code->id}}">
-                            Supprimer
+                            Delete
                         </button>
 
                         <!-- Modal -->
@@ -36,14 +36,14 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Êtes-vous sûre de vouloir supprimer le code {{$code->name}} ?
+                                        Are you sure to whant delete the code {{$code->name}} ?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
                                         </button>
                                         <form method="post" action="{{route('destroy_code',[$code->id])}}">
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger">Confirmer Suppression</button>
+                                            <button type="submit" class="btn btn-danger">Submit</button>
                                         </form>
                                     </div>
                                 </div>
