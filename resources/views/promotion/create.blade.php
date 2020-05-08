@@ -4,7 +4,7 @@
     <div class="container">
         <h1> Create Promotion</h1>
         <br>
-        <form class="form-horizontal" method="post" action="{{route("store_promotion")}}">
+        <form class="form-horizontal" method="post" action="{{route("store_promotion")}}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <fieldset>
 
@@ -34,10 +34,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label class=" control-label" for="path">Image path</label>
+                    <label class=" control-label" for="imagePath">Image</label>
                     <div>
-                        <input id="path" name="path" type="text" placeholder="path"
-                               class="form-control input-md" required="">
+                        <input type="file"
+                               id="imagePath" name="imagePath"
+                               accept="image/png, image/jpeg" data-input="false" required>
                     </div>
                 </div>
 

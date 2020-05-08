@@ -6,10 +6,13 @@ use App\Code;
 use App\Promotion;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Intervention\Image\Facades\Image;
 
 class PromotionController extends Controller
 {
@@ -49,7 +52,14 @@ class PromotionController extends Controller
         $promotion_to_store->discount = $request->input('discount');
         $promotion_to_store->description = $request->input('description');
         $promotion_to_store->link = $request->input('link');
-        $promotion_to_store->image_path = $request->input('path');
+
+        $file = $request->file('imagePath');
+        $originalName = $file->getClientOriginalName();
+        $img = Image::make($file->getRealPath())->resize(500,200);
+        $img->stream();
+        Storage::disk('public')->put('/'.$originalName, $img);
+
+        $promotion_to_store->image_path = $originalName;
         $promotion_to_store->validate_start_date = $request->input('start_date');
         $promotion_to_store->validate_end_date = $request->input('end_date');
         $promotion_to_store->code_id = $request->input('code');
@@ -100,7 +110,17 @@ class PromotionController extends Controller
         $promotion_to_update->discount = $request->input('discount');
         $promotion_to_update->description = $request->input('description');
         $promotion_to_update->link = $request->input('link');
-        $promotion_to_update->image_path = $request->input('path');
+
+        if ($request->file('imagePath') != null ){
+            $file = $request->file('imagePath');
+            $originalName = $file->getClientOriginalName();
+            $img = Image::make($file->getRealPath())->resize(500,200);
+            $img->stream();
+            Storage::disk('public')->put('/'.$originalName, $img);
+
+            $promotion_to_update->image_path = $originalName;
+        }
+
         $promotion_to_update->validate_start_date = $request->input('start_date');
         $promotion_to_update->validate_end_date = $request->input('end_date');
         $promotion_to_update->code_id = $request->input('code');

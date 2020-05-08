@@ -4,7 +4,7 @@
     <div class="container">
         <h1> Edit promotion " {{$promotion_to_edit->discount}} "</h1>
         <br>
-        <form class="form-horizontal" method="post" action="{{route("update_promotion", [$promotion_to_edit->id])}}">
+        <form class="form-horizontal" method="post" action="{{route("update_promotion", [$promotion_to_edit->id])}}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <fieldset>
 
@@ -34,10 +34,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label class=" control-label" for="path">Image path</label>
+                    <label class=" control-label" for="imagePath">Image</label>
                     <div>
-                        <input id="path" name="path" type="text" placeholder="path"
-                               class="form-control input-md" required="" value="{{$promotion_to_edit->image_path}}">
+                        <input type="file"
+                               id="imagePath" name="imagePath"
+                               accept="image/png, image/jpeg" data-input="false" value="{{URL::asset('/images/'.$promotion_to_edit->image_path)}}">
+                        <img src="{{URL::asset('/images/'.$promotion_to_edit->image_path)}}" width="100px" height="50px">
+
                     </div>
                 </div>
 
