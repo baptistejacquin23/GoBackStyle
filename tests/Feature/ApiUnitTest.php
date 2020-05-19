@@ -17,9 +17,18 @@ class ApiUnitTest extends TestCase
      */
     use RefreshDatabase;
 
+    public function setUp(): void{
+        parent::setUp();
+
+        putenv('DB_DEFAULT=sqlite_testing');
+
+    }
+    public function tearDown(): void{
+        parent::tearDown();
+    }
+
     public function testApiGetPromotions()
     {
-        putenv('DB_DEFAULT=sqlite_testing');
         $code = new Code();
         $code->id = 1;
         $code->name = "test";
@@ -52,7 +61,6 @@ class ApiUnitTest extends TestCase
 
     public function testApiCodeExistButNoPromotions()
     {
-        putenv('DB_DEFAULT=sqlite_testing');
         $code = new Code();
         $code->name = "test";
         $savedCode = $code->save();
@@ -69,7 +77,6 @@ class ApiUnitTest extends TestCase
 
     public function testApiCodeDoesntExist()
     {
-        putenv('DB_DEFAULT=sqlite_testing');
 
         $response = $this->json('GET', '/api/promotions/test');
 
